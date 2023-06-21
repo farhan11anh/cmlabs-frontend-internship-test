@@ -43,11 +43,16 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script>
         $.ajax({
-            url:"https://www.themealdb.com/api/json/v1/1/categories.php1",
+            url:"https://www.themealdb.com/api/json/v1/1/categories.php",
             method:"get",
             error : (err)=>{
                 console.log('error');
-
+                const content = `
+                <div class="col-12 mt-5">
+                    <h4 class="text-center">Data Not Found</h4>
+                </div>
+                `;
+                $('#category').append(content)
             }
         }).done(function(data){
             // console.log(data);
