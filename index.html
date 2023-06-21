@@ -43,10 +43,14 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script>
         $.ajax({
-            url:"https://www.themealdb.com/api/json/v1/1/categories.php",
-            method:"get"
+            url:"https://www.themealdb.com/api/json/v1/1/categories.php1",
+            method:"get",
+            error : (err)=>{
+                console.log('error');
+
+            }
         }).done(function(data){
-            console.log(data);
+            // console.log(data);
             for(const item of data.categories){
                 // console.log(item);
                 const content = `
