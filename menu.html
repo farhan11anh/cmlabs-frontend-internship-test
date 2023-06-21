@@ -81,6 +81,23 @@
                 `
                 $('#menu').append(content)
             }
+
+            $( document ).ready(function() {
+                
+                // get category name
+                let category;
+                $('.cat-item').click((e)=>{
+                    // console.log($(e.currentTarget).children('.card').children('.card-body').children('h5')[0].innerHTML)
+                    detail = $(e.currentTarget).children('.card').children('.card-body').children('h6')[0].innerHTML;
+
+                    window.location.href=`detail.html?detail=${detail}`
+
+                    // set detail at local storage
+                    localStorage.removeItem('detail');
+                    localStorage.setItem('detail', detail)
+                })
+                
+            });
         })
 
         // $(document).ready(function(){
