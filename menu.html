@@ -50,48 +50,42 @@
         const category = localStorage.getItem('category');
         const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
 
-        
+        let menu = new Menu(url, 'get');
 
-        $.ajax({
-            url : url,
-            method : 'get',
-            error : (err)=>{
-                console.log('error');
+        // get result fetch api
+        menu.getData()
+            .done((data)=>{
+                $('#title').html(category)
+
+
+                for(const item of data.meals){
+                    // console.log(item);
+                    const content = `
+                    <div class="col-md-3 col-sm-4 col-xs-6 bott-buffer cat-item">
+                        <div class="card" style="width: 100%;">
+                            <div class="img" >
+                                <img class="card-img-top" src="${item.strMealThumb}" alt="Card image cap">
+                            </div>
+                            <div class="card-body">
+                                <h6>${item.strMeal}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                    $('#menu').append(content)
+                }
+            })
+            .fail(()=>{
                 const content = `
                 <div class="col-12 mt-5">
                     <h4 class="text-center">Data Not Found</h4>
                 </div>
                 `;
                 $('#category').append(content)
-            }
-        }).done((data)=>{
-            console.log(data);
-            $('#title').html(category)
+            })
 
-
-            for(const item of data.meals){
-                // console.log(item);
-                const content = `
-                <div class="col-md-3 col-sm-4 col-xs-6 bott-buffer cat-item">
-                    <div class="card" style="width: 100%;">
-                        <div class="img" >
-                            <img class="card-img-top" src="${item.strMealThumb}" alt="Card image cap">
-                        </div>
-                        <div class="card-body">
-                            <h6>${item.strMeal}</h6>
-                        </div>
-                    </div>
-                </div>
-                `
-                $('#menu').append(content)
-            }
-
-            $( document ).ready(function() {
-                
-                // get category name
-                let category;
-                $('.cat-item').click((e)=>{
-                    // console.log($(e.currentTarget).children('.card').children('.card-body').children('h5')[0].innerHTML)
+            $(document).ready(function(){
+                $('#menu').on('click','.cat-item', (e)=>{
                     detail = $(e.currentTarget).children('.card').children('.card-body').children('h6')[0].innerHTML;
 
                     window.location.href=`detail.html?detail=${detail}`
@@ -101,17 +95,8 @@
                     localStorage.setItem('detail', detail)
                 })
                 
-            });
-        })
+            })
 
-        // $(document).ready(function(){
-        // var idx = document.URL.indexOf('?category=');
-    
-        // if (idx !== -1) {
-        //     console.log(document.URL.indexOf('?category='));
-        //     console.log(document.URL);
-        // }
-        // });
     </script>
 </body>
 </html>
