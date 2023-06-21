@@ -41,54 +41,67 @@
     <!-- jquery -->
     <script src="./assets/js/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    
+    <!-- oop menu -->
+    <script src="./assets/js/script.js"></script>
+
     <script>
-        $.ajax({
-            url:"https://www.themealdb.com/api/json/v1/1/categories.php",
-            method:"get",
-            error : (err)=>{
-                console.log('error');
+        const url = 'https://www.themealdb.com/api/json/v1/1/categories.php';
+        // declare class oop
+        let menu = new Menu(url, 'get');
+
+        // get result fetch api 
+        menu.getData()
+            .done((data)=>{
+                console.log(data);
+
+                //memasukan item data ke halaman web
+                for(const item of data.categories) {
+                    const content = `
+                    <div class="col-md-3 col-sm-4 col-xs-6 bott-buffer cat-item">
+                        <div class="card" style="width: 100%;">
+                            <div class="img" >
+                                <img class="card-img-top" src="${item.strCategoryThumb}" alt="Card image cap">
+                            </div>
+                            <div class="card-body">
+                                <h5>${item.strCategory}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                    $('#category').append(content)
+                }
+            })
+
+            .fail(()=>{
                 const content = `
                 <div class="col-12 mt-5">
                     <h4 class="text-center">Data Not Found</h4>
                 </div>
                 `;
                 $('#category').append(content)
-            }
-        }).done(function(data){
-            // console.log(data);
-            for(const item of data.categories){
-                // console.log(item);
-                const content = `
-                <div class="col-md-3 col-sm-4 col-xs-6 bott-buffer cat-item">
-                    <div class="card" style="width: 100%;">
-                        <div class="img" >
-                            <img class="card-img-top" src="${item.strCategoryThumb}" alt="Card image cap">
-                        </div>
-                        <div class="card-body">
-                            <h5>${item.strCategory}</h5>
-                        </div>
-                    </div>
-                </div>
-                `
-                $('#category').append(content)
-            }
+            })
+        
 
-            $( document ).ready(function() {
-                
-                // get category name
-                let category;
-                $('.cat-item').click((e)=>{
-                    // console.log($(e.currentTarget).children('.card').children('.card-body').children('h5')[0].innerHTML)
-                    category = $(e.currentTarget).children('.card').children('.card-body').children('h5')[0].innerHTML;
+    </script>
 
-                    window.location.href=`menu.html?category=${category}`
+    <script>
 
-                    localStorage.removeItem('category');
-                    localStorage.setItem('category', category)
-                })
-                
-            });
+        $(document).ready(function(){
+            $('#category').on('click','.cat-item', (e)=>{
+                console.log(e.currentTarget);
+                let category = $(e.currentTarget).children('.card').children('.card-body').children('h5')[0].innerHTML;
+
+                window.location.href=`menu.html?category=${category}`
+
+                localStorage.removeItem('category');
+                localStorage.setItem('category', category)
+            })
+            
         })
+
+
+ 
     </script>
 </body>
 </html>
