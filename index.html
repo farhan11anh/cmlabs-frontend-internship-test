@@ -13,12 +13,14 @@
 </head>
 <body>
 
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Han's Food</h5>
+    <div class="nav d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal name-tit">Han's Food</h5>
         <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" href="#">Home</a>
+          <a class="p-2 text-white item-menu" href="#">Home</a>
         </nav>
     </div>
+
+    <div class="box"></div>
 
     <div class="container">
 
@@ -62,7 +64,7 @@
                     const content = `
                     <div class="col-md-3 col-sm-4 col-xs-6 bott-buffer cat-item">
                         <div class="card" style="width: 100%;">
-                            <div class="img" >
+                            <div class="img mt-3">
                                 <img class="card-img-top" src="${item.strCategoryThumb}" alt="Card image cap">
                             </div>
                             <div class="card-body">

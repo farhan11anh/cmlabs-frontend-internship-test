@@ -1,24 +1,56 @@
 body {
-  color: rgba(0, 0, 0, 0.601);
+  color: #9c663d;
+  color : rgba(255, 255, 255, 0.653);
+  background-image : url('/assets/img/bg.jpg');
+  width:100%;
+  height : 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+.nav {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  background-color : transparent !important;
+  border : none;
+}
+
+.box {
+  height : 100px;
+  background-color : transparent;
+}
+
 .line {
   border: 1px solid black;
   width:100%;
   height : 100px;
 }
 
+.item-menu {
+  text-decoration : none;
+}
+
+.item-menu:hover {
+  text-decoration : none;
+  color : #9c663d;
+}
+
 .card {
   border : none;
+  background-color : #1a1a1a;
+  box-shadow : 10px 10px 5px rgba(0, 0, 0, 0.305);
+  margin-bottom : 20px;
 }
 
 .card:hover {
-  transform: scale(1.2);
+  transform: scale(1.03);
+  background-color : #9c663d;
   cursor: pointer;
 }
 
-.card-body {
-    min-height : 100px
-}
 .bott-buffer {
     margin-bottom : 10px;
 }
@@ -26,6 +58,10 @@ body {
 #arrow {
   margin-bottom : 20px;
   font-size : 12px;
+}
+
+#arrow a {
+  color : white;
 }
 
 #arrow a {
