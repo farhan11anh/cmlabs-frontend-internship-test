@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <!-- style -->
     <link rel="stylesheet" href="./assets/css/style.css">
+
+    <style>
+        .card:hover {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -65,14 +71,15 @@
 
                 for(const item of data.meals){
                     // console.log(item);
+                    let name = (item.strMeal).substring(0,15)
                     const content = `
                     <div class="col-md-3 col-sm-4 col-xs-6 bott-buffer cat-item">
-                        <div class="card" style="width: 100%;">
+                        <div class="card" style="width: 100%;"  data-toggle="tooltip" data-placement="right" title="${item.strMeal}">
                             <div class="img" >
                                 <img class="card-img-top" src="${item.strMealThumb}" alt="Card image cap">
                             </div>
                             <div class="card-body">
-                                <h6>${item.strMeal}</h6>
+                                <h6>${name}...</h6>
                                 <p class="d-none">${item.idMeal}</p>
                             </div>
                         </div>
@@ -81,7 +88,7 @@
                     $('#menu').append(content)
 
                     let arrow = `
-                        <a href="./index.html">Home</a> > <a id="menu-arrow" href="">${localStorage.getItem('category')}</a>
+                        <a href="./index.html">Home</a> > <a class="active" id="menu-arrow" href="">${localStorage.getItem('category')}</a>
                     `;
                     $('#arrow').html(arrow)
                 }
@@ -97,7 +104,7 @@
 
             $(document).ready(function(){
                 $('#menu').on('click','.cat-item', (e)=>{
-                    detail = $(e.currentTarget).children('.card').children('.card-body').children('h6')[0].innerHTML;
+                    detail = $(e.currentTarget).children('.card').attr('title');
                     idMeal = $(e.currentTarget).children('.card').children('.card-body').children('p')[0].innerHTML;
 
                     const mealData = {

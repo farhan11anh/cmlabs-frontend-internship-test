@@ -89,7 +89,7 @@
             .done((data)=>{
 
                 let arrow = `
-                    <a href="./index.html">Home</a> > <a id="menu-arrow" href="/menu.html?category=${localStorage.getItem('category')}">${localStorage.getItem('category')}</a> > <a id="detail-arrow" href="">${JSON.parse(localStorage.getItem('mealData')).detail}</a>
+                    <a href="./index.html">Home</a> > <a id="menu-arrow" href="/menu.html?category=${localStorage.getItem('category')}">${localStorage.getItem('category')}</a> > <a class="active" id="detail-arrow" href="">${JSON.parse(localStorage.getItem('mealData')).detail}</a>
                 `;
                 // add arrow
                 $('#arrow').html(arrow);
