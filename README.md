@@ -18,8 +18,8 @@ git clone https://github.com/farhan11anh/cmlabs-frontend-internship-test.git
 5. Run the application by opening the index.html file in the project directory.
 6. The web page will open in your browser.
 
-## fitur
-1. Menampilkan data kategori makanan
-2. Menampilkan Makanan berdasarkan kategori
-3. Display Makanan secara detail terdapat resep dan cara membuat, dilengkapi dengan video
+## feature
+1. Displays food category data
+2. Display Food by category
+3. Food Display in detail there are recipes and how to make, equipped with videos
 
