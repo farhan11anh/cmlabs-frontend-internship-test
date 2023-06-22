@@ -9,3 +9,13 @@
 .bott-buffer {
     margin-bottom : 10px;
 }
+
+// set image full contain
+.img{
+  box-sizing: border-box;
+  width: 100%;
+  border-radius : 20px;
+}
+.img img {
+  width: 100%;
+}

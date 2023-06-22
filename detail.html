@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <!-- style -->
     <link rel="stylesheet" href="./assets/css/style.css">
+
+    <style>
+
+    </style>
 </head>
 <body>
 
@@ -22,6 +26,29 @@
           <a class="p-2 text-dark" href="#">Pricing</a>
         </nav>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="img">
+                    <img id="image-Thumb" src="" alt="">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="font-weight-bold text-center" id="title"></div>
+                <div class="recipes">
+                    <h6>Recipes</h6>
+                    <ul id="recipes" >
+                        <!-- list of recipes -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="instruction">
+            <!-- description how to -->
+        </div>
+    </div>
+
     
 
     <!-- bootstrap js -->
@@ -31,5 +58,63 @@
     <!-- jquery -->
     <script src="./assets/js/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+
+    <script src="./assets/js/script.js"></script>
+
+    <script>
+        let data = JSON.parse(localStorage.getItem('mealData'));
+        const title = data.detail;
+        $('#title').html(title);
+
+        const idMeal = data.idMeal;
+        const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
+
+        // initiate new obj
+        let detail = new Menu(url, "get");
+
+        // get result api
+        detail.getData()
+            .done((data)=>{
+                // insert image 
+                $('#image-Thumb').attr({src : data.meals[0].strMealThumb});
+
+                let objIng = Object.entries(data.meals[0]);
+                // get ingredient
+                let ingredient = objIng.filter(([key, val])=>key.includes('strIngredient'));
+
+                // get array of ingredient
+                let ing = [] 
+                ingredient.map(([key, val])=>{
+                    if(val !== "" && val !== null){
+                        ing.push(val);
+                    }
+                })
+                console.log(ing);
+                
+                // get array of measure
+                let measure =  objIng.filter(([key, val])=>key.includes('strMeasure'));
+                let mea = []
+                measure.map(([key, val])=>{
+                    if(val !== " " && val !== null){
+                        mea.push(val);
+                    }
+                })
+                console.log(mea);
+
+                let recipes = [];
+                // merge recipe and measure
+                for(let i = 0; i<ing.length; i++){
+                    let rcp = {recipe : ing[i], measure : mea[i]}
+                    recipes.push(rcp)
+                }
+                console.log(recipes);
+
+                for(let rec of recipes){
+                    const content = `<li>${rec.measure} ${rec.recipe}</li>`;
+                    $('#recipes').append(content)
+                }
+            })
+    </script>
 </body>
 </html>

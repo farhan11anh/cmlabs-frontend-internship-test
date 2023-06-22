@@ -50,6 +50,7 @@
         const category = localStorage.getItem('category');
         const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
 
+        // initiate new obj
         let menu = new Menu(url, 'get');
 
         // get result fetch api
@@ -68,6 +69,7 @@
                             </div>
                             <div class="card-body">
                                 <h6>${item.strMeal}</h6>
+                                <p class="d-none">${item.idMeal}</p>
                             </div>
                         </div>
                     </div>
@@ -87,12 +89,18 @@
             $(document).ready(function(){
                 $('#menu').on('click','.cat-item', (e)=>{
                     detail = $(e.currentTarget).children('.card').children('.card-body').children('h6')[0].innerHTML;
+                    idMeal = $(e.currentTarget).children('.card').children('.card-body').children('p')[0].innerHTML;
 
-                    window.location.href=`detail.html?detail=${detail}`
+                    const mealData = {
+                        detail : detail,
+                        idMeal : idMeal
+                    }
 
-                    // set detail at local storage
-                    localStorage.removeItem('detail');
-                    localStorage.setItem('detail', detail)
+                    window.location.href=`detail.html?id=${idMeal}`
+
+                    // set detail and id at local storage
+                    localStorage.removeItem('mealData');
+                    localStorage.setItem('mealData', JSON.stringify(mealData))
                 })
                 
             })
