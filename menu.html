@@ -17,16 +17,18 @@
         <h5 class="my-0 mr-md-auto font-weight-normal">Han's Food</h5>
         <nav class="my-2 my-md-0 mr-md-3">
           <a class="p-2 text-dark" href="./index.html">Home</a>
-          <a class="p-2 text-dark" href="#">Food</a>
-          <a class="p-2 text-dark" href="#">Info</a>
-          <a class="p-2 text-dark" href="#">Pricing</a>
         </nav>
     </div>
 
     <div class="container">
-        <a href="./index.html">Home</a> > <a id="menu-arrow" href="">test</a>
+        <div id="arrow">
 
-        <h2 class="" >Menu <span id="title" ></span> </h2>
+        </div>
+        
+
+        <h2 id="title" > 
+            <!-- title -->
+        </h2>
 
         <div class="row" id="menu">
             <!-- menu -->
@@ -58,7 +60,7 @@
         // get result fetch api
         menu.getData()
             .done((data)=>{
-                $('#title').html(category)
+                $('#title').html(`Menu ${category}`)
 
 
                 for(const item of data.meals){
@@ -78,8 +80,10 @@
                     `
                     $('#menu').append(content)
 
-
-                    $('#menu-arrow').html(localStorage.getItem('category'))
+                    let arrow = `
+                        <a href="./index.html">Home</a> > <a id="menu-arrow" href="">${localStorage.getItem('category')}</a>
+                    `;
+                    $('#arrow').html(arrow)
                 }
             })
             .fail(()=>{

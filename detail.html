@@ -21,14 +21,14 @@
         <h5 class="my-0 mr-md-auto font-weight-normal">Han's Food</h5>
         <nav class="my-2 my-md-0 mr-md-3">
           <a class="p-2 text-dark" href="./index.html">Home</a>
-          <a class="p-2 text-dark" href="#">Food</a>
-          <a class="p-2 text-dark" href="#">Info</a>
-          <a class="p-2 text-dark" href="#">Pricing</a>
         </nav>
     </div>
 
     <div class="container">
-        <a href="./index.html">Home</a> > <a id="menu-arrow" href="">test</a> > <a id="detail-arrow" href=""></a>
+        <div id="arrow"></div>
+        <div id="tag">
+            <!-- tag -->
+        </div>
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="img">
@@ -53,6 +53,10 @@
             <div class="video">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/kSKtb2Sv-_U?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
+        </div>
+
+        <div id="source">
+            <!-- source -->
         </div>
     </div>
 
@@ -84,9 +88,16 @@
         detail.getData()
             .done((data)=>{
 
-                $('#menu-arrow').html(localStorage.getItem('category'));
-                $('#menu-arrow').attr('href', `/menu.html?category=${localStorage.getItem('category')}`)
-                $('#detail-arrow').html(JSON.parse(localStorage.getItem('mealData')).detail)
+                let arrow = `
+                    <a href="./index.html">Home</a> > <a id="menu-arrow" href="/menu.html?category=${localStorage.getItem('category')}">${localStorage.getItem('category')}</a> > <a id="detail-arrow" href="">${JSON.parse(localStorage.getItem('mealData')).detail}</a>
+                `;
+                // add arrow
+                $('#arrow').html(arrow);
+
+                // add tags
+                if(data.meals[0].strTags !== null){
+                    $('#tag').html(` Tags : ${data.meals[0].strTags} `);
+                }
 
                 // insert image 
                 $('#image-Thumb').attr({src : data.meals[0].strMealThumb});
@@ -129,6 +140,10 @@
 
                 let instruction = `<p class="text-indent">${data.meals[0].strInstructions}</p>`
                 $('#instruction').append(instruction)
+
+                // $('iframe').attr('src', data.meals[0].strYoutube)
+
+                $('#source').html(`Source :  <a href='${data.meals[0].strSource}' >${data.meals[0].strSource}</a>`);
             })
     </script>
 </body>

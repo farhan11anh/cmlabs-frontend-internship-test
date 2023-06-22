@@ -4,10 +4,21 @@
   height : 100px;
 }
 .card-body {
-    height : 50px
+    min-height : 100px
 }
 .bott-buffer {
     margin-bottom : 10px;
+}
+
+#arrow {
+  margin-bottom : 20px;
+  font-size : 12px;
+}
+
+#tag {
+  font-size : 12px;
+  float : right;
+  margin-top: -25px
 }
 
 #title {
@@ -44,4 +55,8 @@ iframe {
   position: absolute; 
   top: 0; left: 0; 
   width: 100%; height: 100%;
+}
+
+#source {
+  font-size : 12px;
 }
