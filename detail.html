@@ -28,6 +28,7 @@
     </div>
 
     <div class="container">
+        <a href="./index.html">Home</a> > <a id="menu-arrow" href="">test</a> > <a id="detail-arrow" href=""></a>
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="img">
@@ -44,8 +45,14 @@
                 </div>
             </div>
         </div>
-        <div id="instruction">
+        <div class="mt-3" id="instruction">
             <!-- description how to -->
+        </div>
+
+        <div class="outer-vid mx-auto mb-3">
+            <div class="video">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/kSKtb2Sv-_U?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
@@ -76,6 +83,11 @@
         // get result api
         detail.getData()
             .done((data)=>{
+
+                $('#menu-arrow').html(localStorage.getItem('category'));
+                $('#menu-arrow').attr('href', `/menu.html?category=${localStorage.getItem('category')}`)
+                $('#detail-arrow').html(JSON.parse(localStorage.getItem('mealData')).detail)
+
                 // insert image 
                 $('#image-Thumb').attr({src : data.meals[0].strMealThumb});
 
@@ -114,6 +126,9 @@
                     const content = `<li>${rec.measure} ${rec.recipe}</li>`;
                     $('#recipes').append(content)
                 }
+
+                let instruction = `<p class="text-indent">${data.meals[0].strInstructions}</p>`
+                $('#instruction').append(instruction)
             })
     </script>
 </body>

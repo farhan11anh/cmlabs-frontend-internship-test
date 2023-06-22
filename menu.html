@@ -24,6 +24,8 @@
     </div>
 
     <div class="container">
+        <a href="./index.html">Home</a> > <a id="menu-arrow" href="">test</a>
+
         <h2 class="" >Menu <span id="title" ></span> </h2>
 
         <div class="row" id="menu">
@@ -75,6 +77,9 @@
                     </div>
                     `
                     $('#menu').append(content)
+
+
+                    $('#menu-arrow').html(localStorage.getItem('category'))
                 }
             })
             .fail(()=>{
